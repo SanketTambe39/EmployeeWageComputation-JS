@@ -17,7 +17,11 @@ class EmployeePayrollData {
     }
 
     set name(name) {
-        this._name = name;
+        let nameRegex = /[A-Z][a-z]{2,}/;
+        if (nameRegex.test(name))
+            this._name = name;
+        else
+            throw "Invalid name";
     }
 
     toString() {
@@ -26,12 +30,15 @@ class EmployeePayrollData {
         return "ID: " + this.id + "\nName: " + this.name + "\nSalary: " + this.salary + "\nGender: " + this.gender + "\nStart date: " + this.startDate;
     }
 }
+try{
+    let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
+    console.log(employeePayrollData.toString());
+    employeePayrollData.id = 2;
+    employeePayrollData.name = "Mark";
+    console.log(employeePayrollData.toString());
 
-let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
-console.log(employeePayrollData.toString());
-employeePayrollData.id = 2;
-employeePayrollData.name = "Mark";
-console.log(employeePayrollData.toString());
-
-let newEmployeePayrollData = new EmployeePayrollData(3, "Sanket", 40000, "M", new Date());
-console.log(newEmployeePayrollData.toString());
+    let newEmployeePayrollData = new EmployeePayrollData(3, "Sanket", 40000, "M", new Date());
+    console.log(newEmployeePayrollData.toString());
+} catch (exception) {
+    console.error(exception)
+}
